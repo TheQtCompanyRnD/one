@@ -324,9 +324,12 @@ export const getScheduleActions = (vm) => {
  */
 export const isVmAvailableAction = (action, vms = []) =>
   [vms].flat().every((vm) => {
-    const hypervisor = getHypervisor(vm)
+    let hypervisor = getHypervisor(vm)
     const state = VM_STATES[vm.STATE]?.name
     const lcmState = VM_LCM_STATES[vm.LCM_STATE]?.name
+
+    /* Return default actions for custom drivers */
+    if (VM_ACTIONS_BY_STATE[hypervisor] === undefined) hypervisor = undefined;
 
     if (VM_ACTIONS_BY_STATE[hypervisor]?.[action]?.length === 0) return true
 
