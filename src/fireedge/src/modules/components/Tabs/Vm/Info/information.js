@@ -42,6 +42,7 @@ import { PATH } from '@modules/components/path'
 import { StatusChip, StatusCircle } from '@modules/components/Status'
 import { List } from '@modules/components/Tabs/Common'
 import { isRestrictedAttributes } from '@UtilsModule'
+import { isMAC } from '@UtilsModule'
 
 const { CLUSTER, HOST } = RESOURCE_NAMES
 
@@ -135,7 +136,8 @@ const InformationPanel = ({ vm = {}, actions, oneConfig, adminGroup }) => {
       dataCy: 'locked',
     },
     {
-      name: T.IP,
+      name:
+        ips?.length === 1 && isMAC(ips[0]) ? T.MAC : T.IP,
       value: ips?.length ? (
         <MultipleTags tags={ips} clipboard limitTags={2} />
       ) : (

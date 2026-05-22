@@ -182,7 +182,7 @@ const VmsTable = (props) => {
       accessor: (vm) => getLastHistory(vm)?.HOSTNAME,
     },
     {
-      header: T.IP,
+      header: T.IP + '/' + T.MAC,
       id: 'ips',
       accessor: (vm) => {
         const ips = useMemo(() => getIps(vm), [vm])

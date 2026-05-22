@@ -46,6 +46,7 @@ import { StatusChip, StatusCircle } from '@modules/components/Status'
 import { rowStyles } from '@modules/components/Tables/styles'
 import Timer from '@modules/components/Timer'
 import clsx from 'clsx'
+import { isMAC } from '@UtilsModule'
 
 const VirtualMachineCard = memo(
   /**
@@ -214,7 +215,7 @@ const VirtualMachineCard = memo(
                 </span>
               )}
               {!!ips?.length && (
-                <span title={`${Tr(T.IP)}`}>
+                <span title={`${Tr(ips?.length === 1 && isMAC(ips[0]) ? T.MAC : T.IP)}`}>
                   <Network />
                   <Stack
                     direction="row"

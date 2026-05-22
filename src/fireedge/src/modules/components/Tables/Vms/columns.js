@@ -51,7 +51,7 @@ const COLUMNS = [
   },
   { Header: T.Type, id: 'type', accessor: getVirtualMachineType },
   {
-    Header: T.IP,
+    Header: T.IP + '/' + T.MAC,
     id: 'ips',
     accessor: (row) => getIps(row).join(),
     sortType: 'length',
