@@ -110,6 +110,9 @@ const VmInfoTab = ({ tabProps = {}, id, oneConfig, adminGroup }) => {
     handleDelete: handleAttributeInXml,
   }
 
+  /* Get custom values for VM ip  */
+  const vm_ip = MONITORING?.VM_IP_ADDRESS || MONITORING?.IP;
+
   return (
     <Stack
       display="grid"
@@ -123,6 +126,7 @@ const VmInfoTab = ({ tabProps = {}, id, oneConfig, adminGroup }) => {
           vm={vm}
           oneConfig={oneConfig}
           adminGroup={adminGroup}
+          vm_ip={vm_ip}
         />
       )}
       {permissionsPanel?.enabled && (

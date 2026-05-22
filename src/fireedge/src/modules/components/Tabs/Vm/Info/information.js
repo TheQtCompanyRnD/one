@@ -43,6 +43,7 @@ import { StatusChip, StatusCircle } from '@modules/components/Status'
 import { List } from '@modules/components/Tabs/Common'
 import { isRestrictedAttributes } from '@UtilsModule'
 import { isMAC } from '@UtilsModule'
+import { isIP } from '@UtilsModule'
 
 const { CLUSTER, HOST } = RESOURCE_NAMES
 
@@ -56,7 +57,7 @@ const { CLUSTER, HOST } = RESOURCE_NAMES
  * @param {boolean} props.adminGroup - If the user belongs to oneadmin group
  * @returns {ReactElement} Information tab
  */
-const InformationPanel = ({ vm = {}, actions, oneConfig, adminGroup }) => {
+const InformationPanel = ({ vm = {}, actions, oneConfig, adminGroup, vm_ip }) => {
   const [getCluster, { data: cluster }] =
     ClusterAPI.useLazyGetClusterAdminQuery()
   const [renameVm] = VmAPI.useRenameVmMutation()
@@ -72,7 +73,7 @@ const InformationPanel = ({ vm = {}, actions, oneConfig, adminGroup }) => {
     displayName: stateDisplayName,
   } = getVirtualMachineState(vm)
 
-  const ips = getIps(vm)
+  const ips = isIP(vm_ip) ? [vm_ip] : getIps(vm);
   const { EXTERNAL_PORT_RANGE, INTERNAL_PORT_RANGE } =
     getNicWithPortForwarding(vm) ?? {}
 
